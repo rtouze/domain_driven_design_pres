@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Domain Driven Design</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/solarized.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/solarized.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+        <body>
+          <div class="reveal">
+            <div class="slides">
+              <section>
+                <h2>
+                  Domain Driven Design
+                </h2>
+                <h3>
+                  AKA DDD
+                </h3>
+                <small>Romain TOUZÉ</small>
+              </section>
+              <section>
+                <section>
+                  <h2>Origines</h2>
+                  <p>Eric Evans</p>
+                </section>
+                <section>
+                  <img data-src="img/Domain_Driven_Design-EricEvans.jpg" />
+                </section>
+              </section>
+              <section>
+                <section>
+                  <h2>Pourquoi ?</h2>
+                  <p class="fragment">Modèle anémique</p>
+                  <p class="fragment">Applications centrées sur la base de données</p>
+                  <p class="fragment">Structurations techniques</p>
+                  <p class="fragment">Sous utilisation de la POO (primitive obsession)</p>
+                </section>
+                <section>
+                  <h3>Controller, Bean, Service, Impl…</h3>
+                  <img data-src="img/projectStructure.png" />
+                </section>
+                <section>
+                  <h3>Que fait mon objet ?</h3>
+                  <img data-src="img/direction_projection_bean.png" />
+                </section>
+                <section>
+                  <img data-src="img/getCapFromSense.png" />
+                </section>
+                <section>
+                  <img data-src="img/comprends_pas.png" height="500px" />
+                </section>
+              </section>
+              <section>
+                <section>
+                  <h2>La base</h2>
+                </section>
+                <section>
+                  <h3>Ubiquituous language</h3>
+                  <p class="fragment">dans les CR de workshop…</p>
+                  <p class="fragment">dans les specs</p>
+                  <p class="fragment">dans les tests</p>
+                  <p class="fragment">dans le code</p>
+                </section>
+                <section>
+                  <h3>Aller voir les métiers</h3>
+                  <p class="fragment">Définir les contextes délimités (<em>bounded contexts</em>) qui vont constituer l'application</p>
+                  <p class="fragment">Acquérir le vocabulaire</p>
+                  <p class="fragment">Challenger le métier</p>
+                  <p class="fragment">BDD</p>
+                </section>
+                <section>
+                  <h3>Bounded contexts ?</h3>
+                  <img data-src="img/langage_different.png" height="500px">
+                </section>
+                <section>
+                  <h3>Bounded contexts ?</h3>
+                  <p class="fragment">Utilisation d'un progiciel…</p>
+                  <p class="fragment">Équipes différentes…</p>
+                </section>
+              </section>
+              <section>
+                <section>
+                  <h2>Proposition d'implémentation</h2>
+                </section>
+                <section>
+                  <h3>Découpler l'infrastructure du code métier</p>
+                  <img data-src="img/couche_metier.jpg" height="500px">
+                </section>
+                <section>
+                  <h3>Architecture hexagonale</p>
+                  <img data-src="img/archi_hexagonale.jpg" height="500px" />
+                </section>
+                <section>
+                  <h3>Anticorruption layer</p>
+                  <img data-src="img/acl.jpg" height="500px" />
+                </section>
+              </section>
+              <section>
+                <section>
+                  <h2>Objets</h2>
+                </section>
+                <section>
+                  <h3>Entités</h3>
+                  <p class="fragment">Représente les éléments du domaine ayant un <strong>cycle
+                    de vie</strong> et un <strong>identifiant</strong> dans le
+                  SI.</p>
+                  <p class="fragment">Objets muables</p>
+                </section>
+                <section>
+                  <h3>Valeurs (Value Objects)</h3>
+                  <p class="fragment">Représente une donnée associée aux entités</p>
+                  <p class="fragment">Objet immuables</p>
+                  <p class="fragment">Évite l'obsession des primitives (<em>primitive obsession</em>)</p>
+                </section>
+                <section>
+                  <h3>Exemple : un montant</h3>
+                  <p class="fragment">Integer ? Float ?</p>
+                  <p class="fragment">OK, mais si je dois gérer plusieurs devises ?</p>
+                  <p class="fragment">OK, mais si je dois faire de l'arithmétique en gérant plusieurs devises ?</p>
+                </section>
+                <section>
+                  <h3>Agrégats</h3>
+                  <p class="fragment">Arborescence d'entités et de valeurs</p>
+                  <p class="fragment">Les opérations se font sur la racine uniquement</p>
+                </section>
+              </section>
+              <section>
+                <section>
+                  <h2>Services</h2>
+                </section>
+                <section>
+                  <h3>En général</h3>
+                  <p>Les actions qui ne peuvent pas être portées par les objets eux-mêmes</p>
+                </section>
+                <section>
+                  <h3>Repository</h3>
+                  <p>Récupération et stockage dans la couche de persistance</p>
+                </section>
+                <section>
+                  <h3>Factory</h3>
+                  <p>Traduction des informations envoyées au système</p>
+                </section>
+                <section>
+                  <h3>Rappel</h3>
+                  <img data-src="img/couche_metier.jpg" height="500px">
+                </section>
+              </section>
+              <section>
+                <section>
+                  <h2>Aujourd'hui</h2>
+                </section>
+                <section>
+                  <h3>Limitations</h3>
+                  <p class="fragment">Scalabilité ?</p>
+                  <p class="fragment">Contextualisation lecture / écriture ?</p>
+                </section>
+                <section>
+                  <h3>Scalabilité</h3>
+                  <img data-src="img/client_repo.png" height="500px">
+                </section>
+                <section>
+                  <h3>CQRS</h3>
+                  <p>Command Query Responsibility Segregation</p>
+                </section>
+                <section>
+                  <h3>CQRS</h3>
+                  <img data-src="img/model_de_base.png" height="300px">
+                </section>
+                <section>
+                  <h3>CQRS</h3>
+                  <img data-src="img/cqrs1.png" height="500px">
+                </section>
+                <section>
+                  <h3>CQRS</h3>
+                  <img data-src="img/cqrs2.png" height="500px">
+                </section>
+                <section>
+                  <h3>Event Sourcing</h3>
+                  <img data-src="img/event_sourcing.png" height="500px">
+                </section>
+              </section>
+              <section>
+                <h2>Référence</h2>
+                <p><a href="http://dddcommunity.org/">DDD Community</a></p>
+                <p><a href="http://codebetter.com/gregyoung/2010/02/16/cqrs-task-based-uis-event-sourcing-agh/">CQRS, event sourcing, task based UI</a></p>
+                <p><a href="http://alistair.cockburn.us/Hexagonal+architecture">Hexagonal architecture</a>
+              </section>
+              <section>
+                <h2>C'est tout pour moi !</h2>
+              </section>
+
+            </div>
+          </div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+				]
+			});
+		</script>
+	</body>
+</html>
